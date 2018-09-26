@@ -1,38 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/mainImage"
-        android:src="@drawable/img_first_step" />
+    android:layout_height="match_parent">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/mainText"
-        android:text="First Step"
-        android:textSize="@dimen/main_text"
-        app:layout_constraintTop_toBottomOf="@id/mainImage"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="@dimen/row_top_margin"/>
+        android:id="@+id/title_text"
+        android:text="@string/instruction"
+        android:textSize="@dimen/title_text"
+        android:layout_marginTop="@dimen/first_top_margin"
+        android:layout_centerHorizontal="true" />
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/input_box"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/title_text"
+        android:layout_marginTop="@dimen/row_top_margin">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/input_month"
+            android:textSize="@dimen/main_text" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/month"
+            android:textSize="@dimen/main_text"
+            android:text="@string/month"
+            android:layout_toRightOf="@id/input_month"
+            android:layout_marginLeft="@dimen/row_left_margin"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/input_date"
+            android:textSize="@dimen/main_text"
+            android:layout_toRightOf="@id/month"
+            android:layout_marginLeft="@dimen/row_left_margin"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/date"
+            android:textSize="@dimen/main_text"
+            android:text="@string/date"
+            android:layout_toRightOf="@id/input_date"
+            android:layout_marginLeft="@dimen/row_left_margin"/>
+
+    </RelativeLayout>
+
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/myButton"
-        android:text="Click!"
-        app:layout_constraintTop_toBottomOf="@id/mainText"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:text="@string/button"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/input_box"
         android:layout_marginTop="@dimen/row_top_margin"/>
 
-
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

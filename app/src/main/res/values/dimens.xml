@@ -2,11 +2,13 @@
 <resources>
 <dimen name="drawer_width">240dp</dimen>
 <dimen name="drawer_text">20sp</dimen>
-<dimen name="title_text">16sp</dimen>
-<dimen name="main_text">15sp</dimen>
+<dimen name="title_text">20sp</dimen>
+<dimen name="main_text">18sp</dimen>
 <dimen name="bt_height">36dp</dimen>
-<dimen name="row_top_margin">15dp</dimen>
+<dimen name="zero">0dp</dimen>
+<dimen name="first_top_margin">90dp</dimen>
+<dimen name="row_top_margin">20dp</dimen>
 <dimen name="row_left_margin">5dp</dimen>
 <dimen name="row_right_margin">5dp</dimen>
-<dimen name="row_bottom_margin">15dp</dimen>
+<dimen name="row_bottom_margin">45dp</dimen>
 </resources>

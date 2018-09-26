@@ -1,37 +1,67 @@
 package com.example.sauxt.codingclinic;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    boolean toggle = true;
+    boolean allSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         Button btn = (Button)findViewById(R.id.myButton);
-        final TextView mainText = (TextView) findViewById(R.id.mainText);
-
         btn.setOnClickListener(new Button.OnClickListener(){
             public void onClick(View view){
-                if(toggle){
-                    mainText.setText("What is next?");
-                }else{
-                    mainText.setText("First Step");
-                }
 
-                toggle = !toggle;
+                allSet = false;
+
+                Intent intent = new Intent(getApplicationContext(), NavigationActivity.class);
+                putData(intent);
+
+                if(allSet) {
+                    startActivity(intent);
+                }
 
             }
         });
 
+
+
     }
+
+    void putData(Intent intent){
+        EditText mInput = (EditText)findViewById(R.id.input_month);
+        EditText dInput = (EditText)findViewById(R.id.input_date);
+
+        String month =  mInput.getText().toString();
+        String date = dInput.getText().toString();
+
+        if(month.length() == 0 || date.length() == 0){
+            Toast emptyErr = Toast.makeText(getApplicationContext(),"생일을 모두 입력해주세요", Toast.LENGTH_SHORT);
+            emptyErr.show();
+        }else{
+            allSet = true;
+            intent.putExtra("month", month);
+            intent.putExtra("date", date);
+        }
+
+    }
+
+
+
+
+
+
+
+
+
 }
