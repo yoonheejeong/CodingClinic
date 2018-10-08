@@ -1,67 +1,107 @@
 package com.example.sauxt.codingclinic;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    boolean allSet;
+    Toolbar myToolbar;
+
+    RecyclerView mRecyclerView;
+    RecyclerView.LayoutManager mLayoutManager;
+    ArrayList<ImoticonInfo> imoticonInfoArrayList = new ArrayList<>();
+    MyAdapter myAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button btn = (Button)findViewById(R.id.myButton);
-        btn.setOnClickListener(new Button.OnClickListener(){
-            public void onClick(View view){
+        toolbarSetting();
 
-                allSet = false;
+        recyclerviewSetting();
 
-                Intent intent = new Intent(getApplicationContext(), NavigationActivity.class);
-                putData(intent);
+        addInfoToArrayList();
 
-                if(allSet) {
-                    startActivity(intent);
-                }
+        createAdapter();
 
-            }
-        });
 
+
+        mRecyclerView.setAdapter(myAdapter);
 
 
     }
 
-    void putData(Intent intent){
-        EditText mInput = (EditText)findViewById(R.id.input_month);
-        EditText dInput = (EditText)findViewById(R.id.input_date);
+    public void toolbarSetting(){
 
-        String month =  mInput.getText().toString();
-        String date = dInput.getText().toString();
+        myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(R.string.toolbar_title);
 
-        if(month.length() == 0 || date.length() == 0){
-            Toast emptyErr = Toast.makeText(getApplicationContext(),"생일을 모두 입력해주세요", Toast.LENGTH_SHORT);
-            emptyErr.show();
-        }else{
-            allSet = true;
-            intent.putExtra("month", month);
-            intent.putExtra("date", date);
+    }
+
+    public void recyclerviewSetting(){
+        mRecyclerView = findViewById(R.id.recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+    }
+
+    public void addInfoToArrayList(){
+
+        imoticonInfoArrayList.add(new ImoticonInfo(R.drawable.img_game_over, "So sad"));
+        imoticonInfoArrayList.add(new ImoticonInfo(R.drawable.img_ddr, "So exciting"));
+        imoticonInfoArrayList.add(new ImoticonInfo(R.drawable.img_tv, "So funny"));
+        imoticonInfoArrayList.add(new ImoticonInfo(R.drawable.img_game_over, "So sad"));
+        imoticonInfoArrayList.add(new ImoticonInfo(R.drawable.img_ddr, "So exciting"));
+        imoticonInfoArrayList.add(new ImoticonInfo(R.drawable.img_tv, "So funny"));
+        imoticonInfoArrayList.add(new ImoticonInfo(R.drawable.img_game_over, "So sad"));
+        imoticonInfoArrayList.add(new ImoticonInfo(R.drawable.img_ddr, "So exciting"));
+        imoticonInfoArrayList.add(new ImoticonInfo(R.drawable.img_tv, "So funny"));
+
+    }
+
+    public void createAdapter(){
+        myAdapter = new MyAdapter(imoticonInfoArrayList);
+    }
+
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.toolbar_menu, menu);
+        return true;
+
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.action_menu:
+                return true;
+
+             case android.R.id.home: {
+                 finish();
+                 return true;
+             }
+
+            default:
+
+                return super.onOptionsItemSelected(item);
+
         }
-
     }
-
-
-
-
-
-
-
-
 
 }
+

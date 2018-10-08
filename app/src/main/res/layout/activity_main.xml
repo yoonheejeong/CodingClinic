@@ -1,70 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/title_text"
-        android:text="@string/instruction"
-        android:textSize="@dimen/title_text"
-        android:layout_marginTop="@dimen/first_top_margin"
-        android:layout_centerHorizontal="true" />
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
 
-    <RelativeLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/input_box"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/title_text"
-        android:layout_marginTop="@dimen/row_top_margin">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#dddddd" />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/input_month"
-            android:textSize="@dimen/main_text" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/month"
-            android:textSize="@dimen/main_text"
-            android:text="@string/month"
-            android:layout_toRightOf="@id/input_month"
-            android:layout_marginLeft="@dimen/row_left_margin"/>
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/input_date"
-            android:textSize="@dimen/main_text"
-            android:layout_toRightOf="@id/month"
-            android:layout_marginLeft="@dimen/row_left_margin"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/date"
-            android:textSize="@dimen/main_text"
-            android:text="@string/date"
-            android:layout_toRightOf="@id/input_date"
-            android:layout_marginLeft="@dimen/row_left_margin"/>
-
-    </RelativeLayout>
-
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/myButton"
-        android:text="@string/button"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/input_box"
-        android:layout_marginTop="@dimen/row_top_margin"/>
-
-</RelativeLayout>
+</LinearLayout>
