@@ -6,7 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -19,13 +22,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>  {
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-
+        private ImageView img;
         private TextView titleTv;
         PostUserListener mUserListener;
 
         private MyViewHolder (View userView, PostUserListener postUserListener){
             super(userView);
             titleTv = (TextView) userView.findViewById(R.id.rowText);
+            img = (ImageView) userView.findViewById(R.id.rowPicture);
 
             this.mUserListener = postUserListener;
             userView.setOnClickListener(this);
@@ -64,6 +68,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>  {
         GitUsers user = mUsers.get(position);
         TextView textView = holder.titleTv;
         textView.setText(user.getLogin());
+
+        ImageView imgView = holder.img;
+        String url = user.getAvatarUrl();
+        Glide.with(mContext).load(url).into(imgView);
 
     }
 

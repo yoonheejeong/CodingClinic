@@ -2,7 +2,7 @@
     <string name="app_name">CodingClinic</string>
     <string name="toolbar_title">Instagram</string>
     <string name="instruction">당신의 생일을 입력해주세요:)</string>
-    <string name="button">Next</string>
+    <string name="button">Upload</string>
     <string name="month">월</string>
     <string name="date">일</string>
     <string name="celebration">당신의 생일을 축하합니다!</string>

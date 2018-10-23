@@ -20,6 +20,7 @@
         </activity>
 
         <activity android:name=".NavigationActivity" />
+        <activity android:name=".UploadActivity" />
 
     </application>
 

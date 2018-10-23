@@ -20,20 +20,21 @@
         android:orientation="horizontal">
 
 
-        <!--<ImageView
-            android:id="@+id/row_picture"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+        <ImageView
+            android:id="@+id/rowPicture"
+            android:layout_width="@dimen/rv_img_width"
+            android:layout_height="@dimen/rv_img_height"
             android:layout_gravity="center_vertical"
             android:layout_margin="10dp"
-            tools:src="@drawable/img_game_over"
-            />-->
+            tools:src=""
+            />
 
         <TextView
             android:id="@+id/rowText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/row_left_margin"
             android:textSize="20sp"
             tools:text=""
             />

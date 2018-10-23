@@ -11,4 +11,9 @@
 <dimen name="row_left_margin">5dp</dimen>
 <dimen name="row_right_margin">5dp</dimen>
 <dimen name="row_bottom_margin">45dp</dimen>
+<dimen name="rv_img_width">60dp</dimen>
+<dimen name="rv_img_height">60dp</dimen>
+<dimen name="main_img_width">300dp</dimen>
+<dimen name="main_img_height">270dp</dimen>
+<dimen name="et_height">200dp</dimen>
 </resources>

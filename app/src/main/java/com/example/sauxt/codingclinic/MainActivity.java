@@ -1,5 +1,6 @@
 package com.example.sauxt.codingclinic;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -104,12 +105,14 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.action_menu:
+                Intent intent = new Intent(MainActivity.this , UploadActivity.class);
+                startActivity(intent);
                 return true;
 
-             case android.R.id.home: {
+             case android.R.id.home:
                  finish();
                  return true;
-             }
+
 
             default:
 
