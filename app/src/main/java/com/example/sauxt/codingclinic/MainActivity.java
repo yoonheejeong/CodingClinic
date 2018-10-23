@@ -8,35 +8,57 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    Toolbar myToolbar;
-
-    RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
-    ArrayList<ImoticonInfo> imoticonInfoArrayList = new ArrayList<>();
-    MyAdapter myAdapter;
+    private Toolbar myToolbar;
+    private RecyclerView mRecyclerView;
+    private MyAdapter myAdapter;
+    private GitHubService service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        service = ApiUtils.getGitHubService();
 
         toolbarSetting();
 
-        recyclerviewSetting();
-
-        addInfoToArrayList();
-
         createAdapter();
 
+        recyclerviewSetting();
 
+        loadUsers();
 
-        mRecyclerView.setAdapter(myAdapter);
+    }
+
+    public void loadUsers(){
+
+        service.getGitHubUsers().enqueue(new Callback<List<GitUsers>>() {
+
+            @Override
+            public void onResponse(Call<List<GitUsers>> call, Response<List<GitUsers>> response) {
+                if(response.isSuccessful()){
+                    myAdapter.updateLists(response.body());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<GitUsers>> call, Throwable t) {
+
+            }
+        });
 
 
     }
@@ -55,25 +77,18 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(myAdapter);
 
     }
 
-    public void addInfoToArrayList(){
-
-        imoticonInfoArrayList.add(new ImoticonInfo(R.drawable.img_game_over, "So sad"));
-        imoticonInfoArrayList.add(new ImoticonInfo(R.drawable.img_ddr, "So exciting"));
-        imoticonInfoArrayList.add(new ImoticonInfo(R.drawable.img_tv, "So funny"));
-        imoticonInfoArrayList.add(new ImoticonInfo(R.drawable.img_game_over, "So sad"));
-        imoticonInfoArrayList.add(new ImoticonInfo(R.drawable.img_ddr, "So exciting"));
-        imoticonInfoArrayList.add(new ImoticonInfo(R.drawable.img_tv, "So funny"));
-        imoticonInfoArrayList.add(new ImoticonInfo(R.drawable.img_game_over, "So sad"));
-        imoticonInfoArrayList.add(new ImoticonInfo(R.drawable.img_ddr, "So exciting"));
-        imoticonInfoArrayList.add(new ImoticonInfo(R.drawable.img_tv, "So funny"));
-
-    }
 
     public void createAdapter(){
-        myAdapter = new MyAdapter(imoticonInfoArrayList);
+        myAdapter = new MyAdapter(this, new ArrayList<GitUsers>(0), new MyAdapter.PostUserListener() {
+            @Override
+            public void onPostClick(Integer id) {
+                Toast.makeText(MainActivity.this, "Post id is " + id, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 
@@ -104,4 +119,5 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
+
 
