@@ -1,4 +1,4 @@
-package com.example.sauxt.codingclinic;
+package com.example.sauxt.codingclinic.Data.Entity;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

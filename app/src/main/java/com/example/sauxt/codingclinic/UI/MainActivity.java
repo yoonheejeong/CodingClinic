@@ -1,4 +1,4 @@
-package com.example.sauxt.codingclinic;
+package com.example.sauxt.codingclinic.UI;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.example.sauxt.codingclinic.Data.Network.ApiUtils;
+import com.example.sauxt.codingclinic.Data.Network.GitHubService;
+import com.example.sauxt.codingclinic.Data.Entity.GitUsers;
+import com.example.sauxt.codingclinic.Data.Network.MyAdapter;
+import com.example.sauxt.codingclinic.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         service = ApiUtils.getGitHubService();
 
         toolbarSetting();

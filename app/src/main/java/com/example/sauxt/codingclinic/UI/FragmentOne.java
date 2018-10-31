@@ -1,12 +1,13 @@
-package com.example.sauxt.codingclinic;
+package com.example.sauxt.codingclinic.UI;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.sauxt.codingclinic.R;
 
 public class FragmentOne extends Fragment {
     View view;

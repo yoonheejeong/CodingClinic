@@ -1,4 +1,4 @@
-package com.example.sauxt.codingclinic;
+package com.example.sauxt.codingclinic.UI;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+
+import com.example.sauxt.codingclinic.R;
 
 
 public class NavigationActivity extends AppCompatActivity{

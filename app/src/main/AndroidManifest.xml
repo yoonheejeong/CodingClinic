@@ -3,6 +3,7 @@
     package="com.example.sauxt.codingclinic">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -11,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".UI.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,8 +20,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".NavigationActivity" />
-        <activity android:name=".UploadActivity" />
+        <activity android:name=".UI.NavigationActivity" />
+        <activity android:name=".UI.UploadActivity" />
 
     </application>
 

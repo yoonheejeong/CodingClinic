@@ -1,4 +1,6 @@
-package com.example.sauxt.codingclinic;
+package com.example.sauxt.codingclinic.Data.Network;
+
+import com.example.sauxt.codingclinic.Data.Entity.GitUsers;
 
 import java.util.List;
 

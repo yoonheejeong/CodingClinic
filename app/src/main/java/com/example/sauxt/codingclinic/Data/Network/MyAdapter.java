@@ -1,4 +1,4 @@
-package com.example.sauxt.codingclinic;
+package com.example.sauxt.codingclinic.Data.Network;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.sauxt.codingclinic.Data.Entity.GitUsers;
+import com.example.sauxt.codingclinic.R;
 
 import java.util.List;
 
