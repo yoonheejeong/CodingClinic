@@ -14,7 +14,7 @@ public class NavigationActivity extends AppCompatActivity{
 
     FragmentManager fm;
     FragmentTransaction fTran;
-    FragmentOne frag1;
+    FragmentFeed frag1;
     FragmentTwo frag2;
     FragmentThree frag3;
 
@@ -27,7 +27,7 @@ public class NavigationActivity extends AppCompatActivity{
 
         Intent intent = getIntent();
 
-        frag1 = new FragmentOne();
+        frag1 = new FragmentFeed();
         frag2 = new FragmentTwo();
         frag3 = new FragmentThree();
 

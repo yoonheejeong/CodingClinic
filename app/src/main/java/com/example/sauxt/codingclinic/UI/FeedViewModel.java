@@ -25,4 +25,5 @@ public class FeedViewModel extends AndroidViewModel {
 
     public void insert (Feed feed) { repository.insert(feed); }
 
+
 }

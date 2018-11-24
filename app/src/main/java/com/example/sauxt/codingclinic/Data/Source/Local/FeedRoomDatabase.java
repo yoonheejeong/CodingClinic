@@ -3,11 +3,13 @@ package com.example.sauxt.codingclinic.Data.Source.Local;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
+import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
 import com.example.sauxt.codingclinic.Data.Entity.Feed;
 
 @Database(entities = {Feed.class},version = 1)
+@TypeConverters(DateConverter.class)
 public abstract class FeedRoomDatabase extends RoomDatabase {
     // DB와 연결되는 DAO
     // DAO는 abstract로 getter를 제공
@@ -22,6 +24,7 @@ public abstract class FeedRoomDatabase extends RoomDatabase {
                 if(INSTANCE == null){
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             FeedRoomDatabase.class, "feed_database")
+                            .fallbackToDestructiveMigration()
                             .build();
                 }
             }

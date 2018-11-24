@@ -14,7 +14,9 @@ import com.bumptech.glide.Glide;
 import com.example.sauxt.codingclinic.Data.Entity.Feed;
 import com.example.sauxt.codingclinic.Data.Util.FileUtil;
 import com.example.sauxt.codingclinic.R;
+import com.example.sauxt.codingclinic.UI.MainActivity;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class FeedListAdapter extends RecyclerView.Adapter<FeedListAdapter.FeedViewHolder>{
@@ -26,14 +28,18 @@ public class FeedListAdapter extends RecyclerView.Adapter<FeedListAdapter.FeedVi
     public class FeedViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final ImageView imgView;
-        private final TextView txtView;
+        private final ImageView imgHeart;
+        private final TextView comment;
+        private final TextView date;
         PostFeedListener mFeedListener;
 
 
         public FeedViewHolder(View itemView, PostFeedListener postFeedListener) {
             super(itemView);
-            txtView = (TextView) itemView.findViewById(R.id.rowText);
-            imgView = (ImageView) itemView.findViewById(R.id.rowPicture);
+            comment = itemView.findViewById(R.id.rowText);
+            imgView = itemView.findViewById(R.id.rowPicture);
+            date = itemView.findViewById(R.id.dateText);
+            imgHeart = itemView.findViewById(R.id.heartImg);
 
             this.mFeedListener = postFeedListener;
             itemView.setOnClickListener(this);
@@ -43,7 +49,8 @@ public class FeedListAdapter extends RecyclerView.Adapter<FeedListAdapter.FeedVi
         @Override
         public void onClick(View v) {
             Feed feed = getFeed(getAdapterPosition());
-            this.mFeedListener.onPostClick(feed.getId());
+
+            this.mFeedListener.onPostClick(feed.getLikeCount());
 
             notifyDataSetChanged();
         }
@@ -72,15 +79,34 @@ public class FeedListAdapter extends RecyclerView.Adapter<FeedListAdapter.FeedVi
     @Override
     public void onBindViewHolder(@NonNull FeedListAdapter.FeedViewHolder holder, int position) {
 
-        TextView textView = holder.txtView;
+        TextView textView = holder.comment;
         ImageView imgView = holder.imgView;
+        TextView date = holder.date;
+        final ImageView imgHeart = holder.imgHeart;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
 
         if(mFeeds != null){
-            Feed feed = mFeeds.get(position);
+            final Feed feed = mFeeds.get(position);
 
             textView.setText(feed.getComment());
 
-            // TODO : Load Image from Gallery
+            String dateStr = sdf.format(feed.getCreatedAt());
+            date.setText(dateStr);
+
+            // TODO : Update likeCount when user clicks heart_icon
+            imgHeart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    MainActivity.feedReposit.updateLikeCnt(feed);
+
+                }
+            });
+
+            if(feed.getLikeCount() > 0){
+                imgHeart.setImageResource(R.drawable.filled_heart);
+            }
+
             String uri = feed.getImgUrl();
             Uri imgUri = Uri.parse(uri);
 
@@ -100,7 +126,7 @@ public class FeedListAdapter extends RecyclerView.Adapter<FeedListAdapter.FeedVi
     }
 
     public interface PostFeedListener {
-        void onPostClick(Integer id);
+        void onPostClick(int cnt);
     }
 
 

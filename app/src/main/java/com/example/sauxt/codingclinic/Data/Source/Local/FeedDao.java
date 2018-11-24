@@ -21,4 +21,7 @@ public interface FeedDao {
     @Query("SELECT * from feed_table ORDER BY id ASC")
     LiveData<List<Feed>> getAllFeeds();
 
+    @Query("UPDATE feed_table SET likeCount = :cnt WHERE id = :feed_id")
+    void updateLikeCnt(int feed_id, int cnt);
+
 }

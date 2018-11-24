@@ -11,27 +11,28 @@
         android:layout_height="@dimen/main_img_height"
         android:layout_marginTop="@dimen/first_top_margin"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/img_upload"/>
+        android:src="@drawable/drag_img_here"/>
 
 
     <EditText
+        android:theme="@style/EditTextTheme"
         android:id="@+id/comment"
         android:layout_below="@id/imgSelector"
         android:layout_width="match_parent"
         android:layout_height="@dimen/et_height"
         android:textSize="@dimen/main_text"
-        android:hint="Comment..."/>
+        android:layout_marginBottom="@dimen/row_bottom_margin"
+        android:hint="Comment..." />
 
 
     <Button
         android:id="@+id/uploadBtn"
         android:layout_below="@id/comment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/row_top_margin"
+        android:layout_width="@dimen/bt_width"
+        android:layout_height="@dimen/bt_height"
         android:layout_centerHorizontal="true"
-        android:textSize="@dimen/main_text"
-        android:text="@string/button"/>
+        android:background="@drawable/upload_sq_btn" />
+
 
 </RelativeLayout>
 

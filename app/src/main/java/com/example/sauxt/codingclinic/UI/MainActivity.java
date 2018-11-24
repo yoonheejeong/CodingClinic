@@ -1,81 +1,126 @@
 package com.example.sauxt.codingclinic.UI;
 
 import android.Manifest;
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.sauxt.codingclinic.Data.Entity.Feed;
-import com.example.sauxt.codingclinic.Data.Network.FeedListAdapter;
+import com.example.sauxt.codingclinic.Data.Source.FeedRepository;
 import com.example.sauxt.codingclinic.R;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    RecyclerView.LayoutManager mLayoutManager;
+
     private Toolbar myToolbar;
-    private RecyclerView mRecyclerView;
-    private FeedListAdapter feedAdapter;
+    private BottomNavigationView navigation;
     String[] REQUIRED_PERMISSIONS  = { Manifest.permission.READ_EXTERNAL_STORAGE };
     public static final int NEW_FEED_ACTIVITY_REQUEST_CODE = 1;
     public static final int PERMISSIONS_REQUEST_CODE = 100;
-    private FeedViewModel mFeedViewModel;
     private View mLayout;
+    public static FeedRepository feedReposit;
+    FragmentManager fm;
+    FragmentTransaction fTran;
+    FragmentFeed frag1;
+    FragmentTwo frag2;
+    FragmentThree frag3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mLayout = findViewById(R.id.layout_main);
 
-        findView();
+        feedRepositSetting();
 
         getPermissions();
 
         toolbarSetting();
 
-        createAdapter();
-
-        recyclerviewSetting();
-
-        viewModelSetting();
+        bottomNaviSetting();
 
     }
 
-    private void findView() {
-        mLayout = findViewById(R.id.layout_main);
+    public void bottomNaviSetting(){
+        frag1 = new FragmentFeed();
+        frag2 = new FragmentTwo();
+        frag3 = new FragmentThree();
+
+        navigation = findViewById(R.id.nav_bottom);
+        navigation.setOnNavigationItemSelectedListener(navigationItemListener);
+
+        setFrag(0);
+
     }
 
-    public void viewModelSetting(){
-        // Model Provider
-        mFeedViewModel = ViewModelProviders.of(this).get(FeedViewModel.class);
+    private BottomNavigationView.OnNavigationItemSelectedListener navigationItemListener
 
-        // Observe : Model의 LiveData를 관찰
-        mFeedViewModel.getAllFeeds().observe(this, new Observer<List<Feed>>() {
-            @Override
-            public void onChanged(@Nullable List<Feed> feeds) {
-                feedAdapter.setFeeds(feeds);
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+
+        public boolean onNavigationItemSelected(MenuItem item) {
+
+            switch (item.getItemId()) {
+
+                case R.id.action_one:
+                    setTitle("My Feeds");
+                    setFrag(0);
+                    return true;
+
+                case R.id.action_two:
+                    setFrag(1);
+                    return true;
+
+                case R.id.action_three:
+                    setFrag(2);
+                    return true;
+
             }
-        });
+            return false;
 
+        }
+
+    };
+
+    public void setFrag(int n){
+        fm = getSupportFragmentManager();
+        fTran = fm.beginTransaction();
+
+        switch (n){
+            case 0:
+                fTran.replace(R.id.box_fragment, frag1);
+                fTran.commit();
+                break;
+
+            case 1:
+                fTran.replace(R.id.box_fragment, frag2);
+                fTran.commit();
+                break;
+
+            case 2:
+                fTran.replace(R.id.box_fragment, frag3);
+                fTran.commit();
+                break;
+        }
+    }
+
+    private void feedRepositSetting() {
+        feedReposit = new FeedRepository(getApplication());
     }
 
 
@@ -168,33 +213,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void toolbarSetting(){
 
-        myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(R.string.toolbar_title);
 
-    }
-
-    public void recyclerviewSetting(){
-        mRecyclerView = findViewById(R.id.recycler_view);
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(feedAdapter);
 
     }
-
-
-    public void createAdapter(){
-        feedAdapter = new FeedListAdapter(this, new ArrayList<Feed>(0), new FeedListAdapter.PostFeedListener() {
-
-            @Override
-            public void onPostClick(Integer id) {
-                Toast.makeText(MainActivity.this, "Post id is " + id, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
 
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -224,6 +249,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -231,12 +257,11 @@ public class MainActivity extends AppCompatActivity {
         if(requestCode == NEW_FEED_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK){
             // Insert new Feed to Room Database
             Feed feed = new Feed(data.getStringExtra("comment"), data.getStringExtra("uri"));
-            mFeedViewModel.insert(feed);
+            feedReposit.insert(feed);
 
         }
 
     }
-
 
 }
 

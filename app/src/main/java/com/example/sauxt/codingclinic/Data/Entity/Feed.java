@@ -13,17 +13,19 @@ public class Feed {
 
     @PrimaryKey(autoGenerate = true)
     @NonNull
-    private Integer id;
+    private int id;
 
     public Feed(@NonNull String msg, @NonNull String uri) {
         this.comment = msg;
         this.imgUrl = uri;
+        this.likeCount = 0;
     }
 
     public Feed(){
         this.id = 0;
         this.comment = "";
         this.imgUrl = "";
+        this.likeCount = 0;
     }
 
     @Ignore
@@ -33,19 +35,17 @@ public class Feed {
 
     private String comment;
 
-    @Ignore
-    private Integer likeCount;
+    private Date createdAt;
+
+    private int likeCount;
 
     @Ignore
-    private Integer replyCount;
+    private int replyCount;
 
     @Ignore
     private List<Reply> replyList;
 
-    @Ignore
-    private Date createdAt;
-
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -61,11 +61,11 @@ public class Feed {
         return comment;
     }
 
-    public Integer getLikeCount() {
+    public int getLikeCount() {
         return likeCount;
     }
 
-    public Integer getReplyCount() {
+    public int getReplyCount() {
         return replyCount;
     }
 
@@ -77,7 +77,7 @@ public class Feed {
         return createdAt;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -91,11 +91,11 @@ public class Feed {
         this.comment = comment;
     }
 
-    public void setLikeCount(Integer likeCount) {
+    public void setLikeCount(int likeCount) {
         this.likeCount = likeCount;
     }
 
-    public void setReplyCount(Integer replyCount) {
+    public void setReplyCount(int replyCount) {
         this.replyCount = replyCount;
     }
 

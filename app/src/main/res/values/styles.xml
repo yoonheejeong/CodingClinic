@@ -8,4 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="EditTextTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColor">@color/darkBlue</item>
+        <item name="android:textCursorDrawable">@color/darkBlue</item>
+        <item name="colorAccent">@color/skyBlue</item>
+        <item name="colorControlNormal">@color/darkBlue</item>
+    </style>
+
 </resources>

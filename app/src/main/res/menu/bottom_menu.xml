@@ -5,7 +5,7 @@
         android:id="@+id/action_one"
         app:showAsAction="ifRoom"
         android:enabled="true"
-        android:icon="@drawable/ic_sms"
+        android:icon="@drawable/ic_feed"
         android:title="@string/bottom1"/>
     <item
         android:id="@+id/action_two"

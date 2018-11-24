@@ -6,7 +6,7 @@
     <string name="month">월</string>
     <string name="date">일</string>
     <string name="celebration">당신의 생일을 축하합니다!</string>
-    <string name="bottom1">Message</string>
+    <string name="bottom1">Feed</string>
     <string name="bottom2">Person</string>
     <string name="bottom3">Music</string>
     <string name="askPermission">이 앱을 실행하려면 외부 저장소 접근 권한이 필요합니다.</string>
